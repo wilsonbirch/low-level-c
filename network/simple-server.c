@@ -24,6 +24,10 @@ int main() {
 	};
 
 	// listen
-
+	if(listen(fd,0) == -1){
+		perror("listen");
+		close(fd);
+		return -1;
+	}
 	// accept
 }
