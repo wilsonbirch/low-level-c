@@ -1,0 +1,3 @@
+[submodule "employee-database"]
+	path = employee-database
+	url = git@github.com:wilsonbirch/employee-database.git
