@@ -6,6 +6,8 @@
 
 int main() {
 	struct sockaddr_in serverInfo = {0};
+	struct sockaddr_in clientInfo = {0};
+	int clientSize = 0;
 	serverInfo.sin_family = AF_INET;
 	serverInfo.sin_addr.s_addr = 0;
 	serverInfo.sin_port = htons(5555);
@@ -29,5 +31,14 @@ int main() {
 		close(fd);
 		return -1;
 	}
+
 	// accept
+	int cfd = accept(fd, (struct sockaddr*)&clientInfo, &clientSize);
+	if(cfd == -1){
+		perror("accept");
+		close(fd);
+		return -1;
+	}
+
+	close(cfd);
 }
