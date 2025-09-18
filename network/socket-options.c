@@ -42,7 +42,7 @@ int main() {
 
 	int cfd = -1;
 	int addrlen = sizeof(serverAddr);
-	if ((cfd = accept(sfd, (struct sockaddr *)&serverAddr, (socklen_t*)&addrlen))){
+	if ((cfd = accept(sfd, (struct sockaddr *)&serverAddr, (socklen_t*)&addrlen))<0){
 		perror("accept");
 		exit(EXIT_FAILURE);
 	}
