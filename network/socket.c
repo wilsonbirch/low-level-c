@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-int main {
+int main() {
 	int fd = socket(AF_INET, SOCK_STREAM, 0);
 	if(fd == -1){
 		perror("socket");
