@@ -46,9 +46,10 @@ int find_free_slot(){
 int find_slot_by_fd(int fd){
 	for(int i = 0; i < MAX_CLIENTS; i++){
 		if(clientStates[i].fd == fd){
-			return 1;
+			return i;
 		}
 	}
+	return -1;
 }
 
 int main () {
@@ -106,9 +107,10 @@ int main () {
 			if(clientStates[i].fd != -1){
 				fds[ii].fd = clientStates[i].fd;
 				fds[ii].events = POLLIN;
-				i++;
+				ii++;
 			}
 		}
+		nfds = ii;
 
 		// Wait for an event on one of the sockets
 		int n_events = poll(fds, nfds, -1);
@@ -140,7 +142,7 @@ int main () {
 		}
 
 		// Check each client for read/write activity
-		for (int i = 1; i <= nfds && n_events >0; i++){
+		for (int i = 1; i < nfds && n_events >0; i++){
 			if(fds[i].revents & POLLIN){
 				n_events--;
 
